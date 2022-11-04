@@ -29,7 +29,7 @@ if [[ ${COMMAND} == 'rehydrate' ]]; then
     #echo "For example, today would be: $timepath"
     #read -p 'Rehydrate Date => ' rehydrate
     rclone --config /root/.config/rclone/rclone.conf \
-    --$mtpoint-chunk-size=32M copy $mtpoint:/$rehydrate$CMDARCHIVE $dumpdir \
+    --drive-chunk-size=32M copy $mtpoint:/$rehydrate$CMDARCHIVE $dumpdir \
     -v --stats=60s --transfers=16 --checkers=16
 fi
 
@@ -45,7 +45,7 @@ if [[ ${COMMAND} == 'backup-end' ]]; then
     echo "rcloning $rclonedir"
     #ls $rclonedir
     rclone --config /root/.config/rclone/rclone.conf \
-    --$mtpoint-chunk-size=32M copy $tarfile $mtpoint:/$timepath \
+    --drive-chunk-size=32M copy $tarfile $mtpoint:/$timepath \
     -v --stats=60s --transfers=16 --checkers=16
 fi
 
@@ -82,7 +82,7 @@ if [[ ${COMMAND} == 'job-end' ||  ${COMMAND} == 'job-abort' ]]; then
     echo "rcloning $_filename4"
     #ls $rclonedir
     rclone --config /root/.config/rclone/rclone.conf \
-    --$mtpoint-chunk-size=32M move $_filename4 $mtpoint:/$timepath \
+    --drive-chunk-size=32M move $_filename4 $mtpoint:/$timepath \
     -v --stats=60s --transfers=16 --checkers=16
 
     #rm -rfv $rcloneroot
